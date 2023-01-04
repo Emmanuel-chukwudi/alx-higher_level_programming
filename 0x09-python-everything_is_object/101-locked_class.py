@@ -1,4 +1,4 @@
-!/usr/bin/python3
+#!/usr/bin/python3
 """
 Defines class with no class or object attribute
 Control dynamically created instance attributes
