@@ -1,0 +1,164 @@
+PrincessRuth90
+/
+alx-higher_level_programming
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+Insights
+alx-higher_level_programming/0x07-python-test_driven_development/tests/101-lazy_matrix_mul.txt
+@PrincessRuth90
+PrincessRuth90 CPython #3: Python Strings and lazy matrix
+ 1 contributor
+148 lines (125 sloc)  4.64 KB
+# run test with python3 -m doctest -v ./tests/101-lazy_matrix_mul.txt
+
+First import method to test
+===========================
+>>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
+
+SUCCESS CASES:
+==============
+
+Test signed and unsigned ints and floats in same size lists in list matrix
+::
+>>> m_a = [[1, 2], [3, 4]]
+>>> m_b = m_a
+>>> print(lazy_matrix_mul(m_a, m_b))
+[[ 7 10]
+ [15 22]]
+
+>>> m_a = [[1, 2]]
+>>> m_b = [[3, 4], [5, 6]]
+>>> print(lazy_matrix_mul(m_a, m_b))
+[[13 16]]
+
+>>> m_a = [[1.2, 5.5, 6.2], [4.66, 12.3, -9.2]]
+>>> m_b = [[5.0, 3.3], [-2.9, 4.4], [7.2, 4.4]]
+>>> print(lazy_matrix_mul(m_a, m_b))
+[[ 34.69   55.44 ]
+ [-78.61   29.018]]
+
+>>> m_a = [[1, 2]]
+>>> m_b = [3, 4]
+>>> print(lazy_matrix_mul(m_a, m_b))
+[11]
+
+>>> m_a = [1, 2]
+>>> m_b = [3, 4]
+>>> print(lazy_matrix_mul(m_a, m_b))
+11
+
+>>> m_a = [[1, 2], [3, 4, 5]]
+>>> m_b = [[1, 2], [3, 4]]
+>>> print(lazy_matrix_mul(m_a, m_b))
+[list([1, 2, 3, 4, 5, 3, 4, 5, 3, 4, 5])
+ list([1, 2, 1, 2, 3, 4, 5, 3, 4, 5, 3, 4, 5, 3, 4, 5])]
+
+>>> m_a = [[1, 2], [3, 4]]
+>>> m_b = [[1, 2], [3, 4, 5]]
+>>> print(lazy_matrix_mul(m_a, m_b))
+[list([1, 2, 3, 4, 5, 3, 4, 5])
+ list([1, 2, 1, 2, 1, 2, 3, 4, 5, 3, 4, 5, 3, 4, 5, 3, 4, 5])]
+
+FAIL CASES
+==========
+Test minimum of two arguments must be provided.
+::
+>>> m_a = [[2, 5]]
+>>> print(lazy_matrix_mul(m_a))
+Traceback (most recent call last):
+  ...
+TypeError: lazy_matrix_mul() missing 1 required positional argument: 'm_b'
+
+>>> print(lazy_matrix_mul())
+Traceback (most recent call last):
+  ...
+TypeError: lazy_matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
+
+>>> m_a = [[1, 2], [3, 4]]
+>>> m_b = [[1, 2], [2, 3], [4, 5]]
+>>> print(lazy_matrix_mul(m_a, m_b))
+Traceback (most recent call last):
+  ...
+ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 3 is different from 2)
+
+>>> m_a = [[]]
+>>> m_b = [[5, 6], [7, 8]]
+>>> print(lazy_matrix_mul(m_a, m_b))
+Traceback (most recent call last):
+  ...
+ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 2 is different from 0)
+
+>>> m_a = [[5, 6], [7, 8]]
+>>> m_b = [[]]
+>>> print(lazy_matrix_mul(m_a, m_b))
+Traceback (most recent call last):
+  ...
+ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 1 is different from 2)
+
+>>> m_a = "ALX"
+>>> m_b = [[1, 2]]
+>>> print(lazy_matrix_mul(m_a, m_b))
+Traceback (most recent call last):
+  ...
+numpy.core._exceptions.UFuncTypeError: ufunc 'matmul' did not contain a loop with signature matching types (dtype('<U3'), dtype('int64')) -> None
+
+>>> m_a = [[1, 2]]
+>>> m_b = "ALX"
+>>> print(lazy_matrix_mul(m_a, m_b))
+Traceback (most recent call last):
+  ...
+numpy.core._exceptions.UFuncTypeError: ufunc 'matmul' did not contain a loop with signature matching types (dtype('int64'), dtype('<U3')) -> None
+
+>>> m_a = "ALX"
+>>> m_b = "School"
+>>> print(lazy_matrix_mul(m_a, m_b))
+Traceback (most recent call last):
+  ...
+numpy.core._exceptions.UFuncTypeError: ufunc 'matmul' did not contain a loop with signature matching types (dtype('<U3'), dtype('<U6')) -> None
+
+>>> m_a = None
+>>> m_b = None
+>>> print(lazy_matrix_mul(m_a, m_b))
+Traceback (most recent call last):
+  ...
+ValueError: matmul: Input operand 0 does not have enough dimensions (has 0, gufunc core with signature (n?,k),(k,m?)->(n?,m?) requires 1)
+
+>>> m_a = [1, 2]
+>>> m_b = [[3, 4]]
+>>> print(lazy_matrix_mul(m_a, m_b))
+Traceback (most recent call last):
+  ...
+ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 1 is different from 2)
+
+>>> m_a = [[1, "not int"]]
+>>> m_b = [[3, 4]]
+>>> print(lazy_matrix_mul(m_a, m_b))
+Traceback (most recent call last):
+  ...
+numpy.core._exceptions.UFuncTypeError: ufunc 'matmul' did not contain a loop with signature matching types (dtype('<U21'), dtype('int64')) -> None
+
+>>> m_a = [[5, 6], [6, 4]]
+>>> m_b = [[5, "6"], [7, 8]]
+>>> print(lazy_matrix_mul(m_a, m_b))
+Traceback (most recent call last):
+  ...
+numpy.core._exceptions.UFuncTypeError: ufunc 'matmul' did not contain a loop with signature matching types (dtype('int64'), dtype('<U21')) -> None
+
+>>> m_a = [[1, "not int"]]
+>>> m_b = [[{"a": 1}, 6.6]]
+>>> print(lazy_matrix_mul(m_a, m_b))
+Traceback (most recent call last):
+  ...
+ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 1 is different from 2)
+
+>>> m_a = [[1, 2], [3, 4, 5]]
+>>> m_b = m_a
+>>> print(lazy_matrix_mul(m_a, m_b))
+Traceback (most recent call last):
+  ...
+TypeError: can't multiply sequence by non-int of type 'list'
